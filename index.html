@@ -1,185 +1,464 @@
 <!doctype html>
 <html lang="nl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Jouw Naam — Portfolio</title>
-    <meta name="description" content="Portfolio van Jouw Naam." />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nena de Lange — Projectportfolio</title>
+  <meta name="description" content="Projectportfolio van Nena de Lange. Een overzicht van projecten met korte toelichting en PDF's." />
+  <style>
+    :root{
+      --bg:#0b0d12;
+      --card:#111522;
+      --text:#e9eef7;
+      --muted:#a9b4c7;
+      --line:rgba(255,255,255,.10);
+      --accent:#8ab4ff;
+      --radius:18px;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(138,180,255,.22), transparent 60%),
+                  radial-gradient(900px 700px at 90% 10%, rgba(255,255,255,.08), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,13,18,.65);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 22px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:650; letter-spacing:.2px;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(138,180,255,.18);
+    }
+    .links{
+      display:flex; gap:14px; flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .links a{
+      text-decoration:none;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .links a:hover{
+      color:var(--text);
+      border-color:var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color:var(--text);
+      text-decoration:none;
+      box-shadow: 0 8px 20px rgba(0,0,0,.22);
+    }
+    .btn:hover{background: rgba(255,255,255,.10)}
+    .btn.primary{
+      border-color: rgba(138,180,255,.35);
+      background: rgba(138,180,255,.14);
+    }
+    .btn.primary:hover{background: rgba(138,180,255,.20)}
+    header.hero{
+      padding:56px 0 18px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--muted);
+      background: rgba(255,255,255,.03);
+      font-size:14px;
+    }
+    h1{
+      margin:16px 0 10px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height:1.08;
+      letter-spacing:-.6px;
+    }
+    .lead{
+      margin:0;
+      color:var(--muted);
+      max-width: 70ch;
+      font-size: 16.5px;
+    }
+    .hero-actions{
+      margin-top:18px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+    .scrollhint{
+      margin-top:26px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      color:var(--muted);
+      font-size:14px;
+      text-decoration:none;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+    }
+    @media (min-width: 860px){
+      .grid{grid-template-columns: 1.35fr .65fr;}
+    }
+    section{
+      margin:26px 0;
+    }
+    .card{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card.pad{padding:18px}
+    .section-title{
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:10px;
+      margin:0 0 10px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.2px;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .project{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .project-top{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .pill{
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .project h3{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.2px;
+    }
+    .project p{
+      margin:0;
+      color:var(--muted);
+      max-width: 85ch;
+    }
+    .tags{
+      display:flex; flex-wrap:wrap; gap:8px;
+      margin-top:6px;
+    }
+    .tag{
+      font-size:13px;
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .project-actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:6px;
+    }
+    .aside-list{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:6px;
+    }
+    .kv .k{color:var(--muted); font-size:13px}
+    .kv .v{font-size:15px}
+    .list{
+      margin:10px 0 0;
+      padding:0 0 0 16px;
+      color:var(--muted);
+    }
+    .list li{margin:6px 0}
+    footer{
+      margin:34px 0 10px;
+      color:var(--muted);
+      font-size:14px;
+      border-top:1px solid var(--line);
+      padding-top:18px;
+    }
+    .contact-row{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:12px;
+    }
+    .small{
+      font-size:13px; color:var(--muted);
+      margin-top:10px;
+    }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
+  </style>
+</head>
 
-  <body>
-    <header class="topbar">
-      <a class="logo" href="#top">Jouw Naam</a>
-
-      <nav class="menu">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Ga naar boven">
+        <span class="dot" aria-hidden="true"></span>
+        Nena de Lange
+      </a>
+      <nav class="links" aria-label="Hoofdnavigatie">
+        <a href="#work">Portfolio</a>
+        <a href="#about">Over</a>
         <a href="#contact">Contact</a>
       </nav>
+    </div>
+  </div>
+
+  <main id="top" class="wrap">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="kicker">Projectportfolio</div>
+      <h1>Een selectie van projecten en uitwerkingen</h1>
+      <p class="lead">
+        Een overzicht van uiteenlopende projecten waarbij ik heb gewerkt aan onderzoek, communicatie en uitwerking.
+        Per project vind je een korte toelichting en (optioneel) een PDF met de volledige documentatie.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn primary" href="#work">Bekijk projecten</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+
+      <a class="scrollhint" href="#work" aria-label="Scroll naar projecten">
+        Scroll ↓
+      </a>
     </header>
 
-    <aside class="sideindex" aria-label="Secties">
-      <a href="#top" class="dot" title="Top"></a>
-      <a href="#work" class="dot" title="Work"></a>
-      <a href="#about" class="dot" title="About"></a>
-      <a href="#contact" class="dot" title="Contact"></a>
-    </aside>
+    <!-- CONTENT GRID -->
+    <div class="grid">
+      <!-- LEFT: WORK -->
+      <section id="work" class="card">
+        <div class="project">
+          <div class="section-title">
+            <h2>Projecten</h2>
+            <p>Kort & overzichtelijk</p>
+          </div>
+          <p class="lead" style="margin-top:-2px;">
+            Een selectie van projecten waarin ik heb samengewerkt met verschillende partijen en heb bijgedragen aan zowel inhoud als uitvoering.
+          </p>
+        </div>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-inner">
-          <p class="eyebrow">Marketing • Strategie • Content • Branding</p>
+        <!-- PROJECT 1 -->
+        <article class="project" aria-label="Project 1">
+          <div class="project-top">
+            <div>
+              <div class="meta">
+                <span class="pill">Project — 2024</span>
+                <span class="pill">Lochem</span>
+              </div>
+              <h3>Waterstofproject Lochem</h3>
+            </div>
+          </div>
 
-          <h1 class="headline">
-            Portfolio van <span class="accent">Jouw Naam</span>
-          </h1>
-
-          <p class="subhead">
-            Korte intro in 2 zinnen: wat doe je, voor wie, en welke impact maak je?
+          <p>
+            Bezocht de projectlocatie en sprak met betrokken partijen om resultaten objectief in kaart te brengen en te vertalen naar duidelijke communicatie voor externe doelgroepen.
           </p>
 
-          <div class="hero-cta">
-            <a class="btn" href="#work">Bekijk work</a>
-            <a class="btn ghost" href="#contact">Contact</a>
+          <div class="tags" aria-label="Project onderdelen">
+            <span class="tag">Interviews</span>
+            <span class="tag">Informatie verzamelen</span>
+            <span class="tag">Structureren</span>
+            <span class="tag">Online publicatie</span>
           </div>
-        </div>
 
-        <div class="scrollcue" aria-hidden="true">
-          <span>Scroll</span>
-          <span class="arrow">↓</span>
-        </div>
-      </section>
+          <div class="project-actions">
+            <!-- Vervang de href naar jouw PDF-bestand -->
+            <a class="btn" href="assets/waterstofproject-lochem.pdf" target="_blank" rel="noopener">
+              Bekijk project (PDF)
+            </a>
+          </div>
+        </article>
 
-      <!-- WORK (NU: 2 PROJECTEN) -->
-      <section id="work" class="section">
-        <div class="section-head">
-          <h2>Work</h2>
-          <p>Een selectie van cases. Later kun je hier makkelijk meer aan toevoegen.</p>
-        </div>
+        <div style="height:1px; background:var(--line); margin:0 18px;"></div>
 
-        <div class="cards">
-          <!-- Project 1 (groot) -->
-          <a class="card big" href="#">
-            <div class="card-media">
-              <div class="placeholder">Project visual</div>
-            </div>
-            <div class="card-text">
-              <div class="card-top">
-                <span class="label">Campaign</span>
-                <span class="year">2024</span>
+        <!-- PROJECT 2 -->
+        <article class="project" aria-label="Project 2">
+          <div class="project-top">
+            <div>
+              <div class="meta">
+                <span class="pill">Project — 2023</span>
+                <span class="pill">Groningen</span>
               </div>
-              <h3>Projecttitel 1</h3>
-              <p>1 zin: doel, jouw rol en (liefst) resultaat.</p>
-              <ul class="tags">
-                <li>Strategy</li><li>Social</li><li>Copy</li>
-              </ul>
-            </div>
-          </a>
-
-          <!-- Project 2 (normaal) -->
-          <a class="card" href="#">
-            <div class="card-media">
-              <div class="placeholder">Project visual</div>
-            </div>
-            <div class="card-text">
-              <div class="card-top">
-                <span class="label">Brand</span>
-                <span class="year">2023</span>
-              </div>
-              <h3>Projecttitel 2</h3>
-              <p>1 zin: wat heb je gemaakt/geoptimaliseerd? (kort en concreet)</p>
-              <ul class="tags">
-                <li>Branding</li><li>Positioning</li>
-              </ul>
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <!-- ABOUT -->
-      <section id="about" class="section alt">
-        <div class="split">
-          <div>
-            <h2>About</h2>
-            <p class="lead">
-              Schrijf hier je verhaal: wie je bent, hoe je werkt en waar je energie van krijgt.
-            </p>
-            <p>
-              Denk aan: type merken, jouw aanpak, jouw sterke punten. 2–3 alinea’s is genoeg.
-            </p>
-
-            <div class="facts">
-              <div>
-                <span class="k">Locatie</span>
-                <span class="v">Nederland</span>
-              </div>
-              <div>
-                <span class="k">Focus</span>
-                <span class="v">Brand & Growth</span>
-              </div>
-              <div>
-                <span class="k">Tools</span>
-                <span class="v">GA4, Meta Ads, etc.</span>
-              </div>
+              <h3>Communicatiecampagne Wijk Beijum</h3>
             </div>
           </div>
 
-          <div class="panel">
-            <h3>Skills</h3>
-            <ul>
-              <li>Strategie & positionering</li>
-              <li>Campagnes (paid/organic)</li>
-              <li>Content & copywriting</li>
-              <li>Analyse & optimalisatie</li>
-            </ul>
-            <a class="btn small" href="#contact">Stuur bericht</a>
-          </div>
-        </div>
-      </section>
+          <p>
+            Onderzoek gedaan naar bereik en behoeften van bewoners en dit vertaald naar een campagneconcept met passende middelen en tone of voice.
+          </p>
 
-      <!-- CONTACT -->
-      <section id="contact" class="section">
-        <div class="section-head">
-          <h2>Contact</h2>
-          <p>Vervang dit door jouw mail en LinkedIn.</p>
-        </div>
-
-        <div class="contact">
-          <div class="contact-links">
-            <a href="mailto:jij@email.nl">jij@email.nl</a>
-            <a href="#" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href="#" target="_blank" rel="noreferrer">Download CV (PDF)</a>
+          <div class="tags" aria-label="Project onderdelen">
+            <span class="tag">Doelgroeponderzoek</span>
+            <span class="tag">Campagneconcept</span>
+            <span class="tag">Tone of voice</span>
+            <span class="tag">Content & middelen</span>
           </div>
 
-          <form class="form" action="#" method="post">
-            <label>
-              Naam
-              <input type="text" name="name" placeholder="Jouw naam" />
-            </label>
-            <label>
-              E-mail
-              <input type="email" name="email" placeholder="jij@email.nl" />
-            </label>
-            <label>
-              Bericht
-              <textarea name="message" rows="5" placeholder="Waar kan ik mee helpen?"></textarea>
-            </label>
-            <button class="btn" type="submit">Versturen</button>
-            <p class="note">
-              Wil je echt berichten ontvangen? Gebruik later Formspree of Netlify Forms.
-            </p>
-          </form>
-        </div>
-      </section>
-    </main>
+          <div class="project-actions">
+            <!-- Vervang de href naar jouw PDF-bestand -->
+            <a class="btn" href="assets/campagne-beijum.pdf" target="_blank" rel="noopener">
+              Bekijk project (PDF)
+            </a>
+          </div>
+        </article>
 
-    <footer class="footer">
-      © <span id="year"></span> Jouw Naam
+        <!-- TEMPLATE: kopieer dit blok om makkelijk meer projecten toe te voegen -->
+        <!--
+        <div style="height:1px; background:var(--line); margin:0 18px;"></div>
+        <article class="project" aria-label="Project X">
+          <div class="project-top">
+            <div>
+              <div class="meta">
+                <span class="pill">Project — 202X</span>
+                <span class="pill">Plaats / Thema</span>
+              </div>
+              <h3>Projecttitel</h3>
+            </div>
+          </div>
+
+          <p>Korte beschrijving (1–2 zinnen) wat het project was en jouw bijdrage.</p>
+
+          <div class="tags">
+            <span class="tag">Onderdeel 1</span>
+            <span class="tag">Onderdeel 2</span>
+            <span class="tag">Onderdeel 3</span>
+          </div>
+
+          <div class="project-actions">
+            <a class="btn" href="assets/jouw-bestand.pdf" target="_blank" rel="noopener">Bekijk project (PDF)</a>
+          </div>
+        </article>
+        -->
+      </section>
+
+      <!-- RIGHT: ABOUT / INFO -->
+      <aside class="aside-list">
+        <section id="about" class="card pad">
+          <div class="section-title">
+            <h2>Over dit portfolio</h2>
+            <p>Algemeen</p>
+          </div>
+          <p class="lead">
+            Dit portfolio is bedoeld om een beeld te geven van mijn ervaring binnen verschillende soorten projecten.
+            Mijn rol verschilt per project, maar bestaat vaak uit het ophalen van informatie, het analyseren ervan en het vertalen naar een helder eindproduct.
+          </p>
+        </section>
+
+        <section class="card pad" aria-label="Korte info">
+          <div class="section-title">
+            <h2>Info</h2>
+            <p>In één oogopslag</p>
+          </div>
+
+          <div class="kv" style="margin-top:10px;">
+            <div class="k">Locatie</div>
+            <div class="v">Nederland</div>
+
+            <div class="k" style="margin-top:8px;">Interesses</div>
+            <div class="v">Projectmatig werken, communicatie, maatschappelijke en technische projecten</div>
+
+            <div class="k" style="margin-top:8px;">Vaardigheden</div>
+            <div class="v">Onderzoek • Schrijven • Samenwerken • Plannen</div>
+          </div>
+        </section>
+
+        <section id="contact" class="card pad">
+          <div class="section-title">
+            <h2>Contact</h2>
+            <p>Voor vragen</p>
+          </div>
+
+          <p class="lead">
+            Wil je meer weten over een project of een documentatie ontvangen? Neem gerust contact op.
+          </p>
+
+          <div class="contact-row" role="list">
+            <!-- Vervang placeholders -->
+            <a class="btn" href="mailto:jij@email.nl">jij@email.nl</a>
+            <a class="btn" href="https://www.linkedin.com/in/jouw-profiel" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="assets/cv-nena-de-lange.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+          </div>
+
+          <p class="small">
+            Tip: zet je PDF’s in een map <strong>assets/</strong> en pas de links hierboven aan.
+          </p>
+        </section>
+      </aside>
+    </div>
+
+    <footer>
+      © <span id="year"></span> Nena de Lange
     </footer>
+  </main>
 
-    <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
-  </body>
+  <script>
+    // Kleine quality-of-life: automatisch jaartal
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
